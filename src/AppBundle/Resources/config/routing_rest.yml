@@ -2,3 +2,4 @@ books :
     type : rest
     resource : "AppBundle:BookRest"
     name_prefix: api_
+#BookRest est le controller
