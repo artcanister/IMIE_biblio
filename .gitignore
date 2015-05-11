@@ -2,3 +2,4 @@ nbproject/private/
 web/*
 app/logs/*
 app/cache/*
+app/config/parameters.yml
