@@ -1,0 +1,4 @@
+books :
+    type : rest
+    resource : "AppBundle:BookRest"
+    name_prefix: api_
