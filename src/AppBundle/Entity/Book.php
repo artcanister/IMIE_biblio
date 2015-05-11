@@ -3,12 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Book
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\BookRepository")
+ * @ExclusionPolicy("all")
  */
 class Book
 {
@@ -18,6 +23,7 @@ class Book
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +31,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Expose
      */
     private $title;
 
@@ -32,6 +39,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="author", type="string", length=255)
+     * @Expose
      */
     private $author;
 
@@ -39,6 +47,7 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="releasedate", type="datetime")
+     * @Expose
      */
     private $releasedate;
 
@@ -46,6 +55,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Expose
      */
     private $description;
 
