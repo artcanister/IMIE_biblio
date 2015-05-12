@@ -1,0 +1,4 @@
+services:
+    book_manager:
+        class: AppBundle\Services\BookManager
+        arguments: ["@doctrine.orm.entity_manager"]

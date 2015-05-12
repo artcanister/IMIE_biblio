@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Entity\Book;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class BookRestController extends Controller {
     /**
@@ -16,7 +17,7 @@ class BookRestController extends Controller {
      *  tags={
      *      "in-development"}
      * )
-     * @return array
+     * 
      * 
      */
     public function getBooksAction(){
@@ -30,59 +31,30 @@ class BookRestController extends Controller {
      * 
      * @ApiDoc(
      *  resource = true,
-     *  description="Get a book with his id",
+     *  description="Return a book by its id",
      *  tags={
      *      "in-development"}
      * )
      * 
      */
     public function getBookByIdAction($id){
-        $book = $this->getDoctrine()->getRepository('AppBundle:Book')->findOneBy($id);
+        $book = $this->get("book_manager")->findById($id);
         return $book;
     }
     
     /**
+     * 
      * @ApiDoc(
-     *  resource= true,
-     *  description="edit a book and persist in database",
+     *  resource = true,
+     *  description="Delete a book with the BookManager",
      *  tags={
      *      "in-development"}
      * )
      * 
-     * @ParamConverter("post", class="AppBundle:Book")
      */
-    public function putBookAction(){
-        //is a complete edit of a book and saving method
-        
-        
-    }
+    public function deleteBookAction($id){
+      $this->get("book_manager")->removeBook($id);
+   }
     
-    /**
-     * @ApiDoc(
-     *  resource= true,
-     *  description="This method delete a book. All its fields, but only one resource.",
-     *  tags={
-     *      "in-development"}
-     * )
-     * 
-     * @ParamConverter("post", class="AppBundle:Book")
-     */
-   public function deleteBookAction(Book $book){
-       $em = $this->getDoctrine()->getManager();
-       $em->remove($book);
-   }
-   
-   /**
-     * @ApiDoc(
-     *  resource= true,
-     *  description="You can use it to update the title, author, categories and all the informations of the book.",
-     *  tags={
-     *      "in-development"}
-     * )
-    * @ParamConverter("post", class="AppBundle:Book")
-    */
-   public function updateBookAction(Book $book){
-       
-   }
 }
 
