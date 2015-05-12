@@ -27,7 +27,7 @@ class BookRestController extends Controller {
      * 
      * @ApiDoc(
      *  resource = true,
-     *  description="Get a book with his id"
+     *  description="Get a book with his id",
      *  tags={
      *      "in-development"}
      * )
