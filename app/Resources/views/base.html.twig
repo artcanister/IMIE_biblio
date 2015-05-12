@@ -2,12 +2,67 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>Biblio</title>
+        {% stylesheets filter='cssrewrite'
+            'bundles/app/materialize/css/materialize.min.css' %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% javascripts
+            'bundles/app/jquery/jquery-2.1.4.min.js'
+            'bundles/app/materialize/js/materialize.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav>
+                <a class="page-title" style="margin-left: 50px;">{% block title %}Biblio{% endblock %}</a></div>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bouquins<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                <ul id='Bouquins1' class='dropdown-content'>
+                  <li><a href="#!">Ajouter</a></li>
+                  <li><a href="#!">Second</a></li>
+                  <li><a href="#!">Third</a></li>
+                  <li><a href="#!">Fourth</a></li>
+                </ul>
+              </ul>
+              <ul id="slide-out" class="side-nav">
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li> 
+                <li class="no-padding">
+                  <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header">Bouquins<i class="mdi-navigation-arrow-drop-down"></i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a href="#!">Ajouter</a></li>
+                          <li><a href="#!">Second</a></li>
+                          <li><a href="#!">Third</a></li>
+                          <li><a href="#!">Fourth</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </main>
         {% block javascripts %}{% endblock %}
+    <script type="text/javascript">
+        $(".button-collapse").sideNav();
+    </script>
     </body>
 </html>
