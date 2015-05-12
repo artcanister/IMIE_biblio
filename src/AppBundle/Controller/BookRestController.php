@@ -37,11 +37,25 @@ class BookRestController extends Controller {
      * )
      * 
      */
-    public function getBookByIdAction($id){
+    public function getBookAction($id){
         $book = $this->get("book_manager")->findById($id);
         return $book;
     }
     
+    /**
+     * 
+     * @ApiDoc(
+     *  resource = true,
+     *  description="Can add a book.",
+     *  tags={
+     *      "in-development"}
+     * )
+     * 
+     */
+    public function addBookAction(){
+        //post -> bookmanager request
+        
+    }
     /**
      * 
      * @ApiDoc(

@@ -16,7 +16,15 @@ class BookManager{
     
     //remove, add and update for api here
     
+    public function addBook(){
+        
+    }
+    
     public function removeBook(){
+        
+    }
+    
+    public function updateBook(){
         
     }
     
