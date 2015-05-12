@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{form_start(form)}}
+    {{form_rest(form)}}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="mdi-content-send right"></i>
+    </button>
+    {{form_end(form)}}
+{% endblock %}
