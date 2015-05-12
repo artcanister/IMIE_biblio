@@ -22,5 +22,24 @@ class BookRestController extends Controller {
         
         return $books;
     }
+    
+    /**
+     * 
+     * @ApiDoc(
+     *  resource = true,
+     *  description="Get a book with his id"
+     *  tags={
+     *      "in-development"}
+     * )
+     * 
+     */
+    public function getBookByIdAction($id){
+        $book = $this->getDoctrine()->getRepository('AppBundle:Book')->findOneBy($id);
+        return $book;
+    }
+    
+    //public function addBookAction($author, $releasedate, $title, $categories, $description)
+    
+    
 }
 

@@ -15,8 +15,8 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\BookRepository")
  * @ExclusionPolicy("all")
  */
-class Book
-{
+class Book {
+
     /**
      * @var integer
      *
@@ -59,14 +59,21 @@ class Book
      */
     private $description;
 
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="categories", type="string")
+     * @Expose
+     */
+    private $categories;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -76,10 +83,9 @@ class Book
      * @param string $title
      * @return Book
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -88,8 +94,7 @@ class Book
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -99,10 +104,9 @@ class Book
      * @param string $author
      * @return Book
      */
-    public function setAuthor($author)
-    {
+    public function setAuthor($author) {
         $this->author = $author;
-    
+
         return $this;
     }
 
@@ -111,8 +115,7 @@ class Book
      *
      * @return string 
      */
-    public function getAuthor()
-    {
+    public function getAuthor() {
         return $this->author;
     }
 
@@ -122,10 +125,9 @@ class Book
      * @param \DateTime $releasedate
      * @return Book
      */
-    public function setReleasedate($releasedate)
-    {
+    public function setReleasedate($releasedate) {
         $this->releasedate = $releasedate;
-    
+
         return $this;
     }
 
@@ -134,8 +136,7 @@ class Book
      *
      * @return \DateTime 
      */
-    public function getReleasedate()
-    {
+    public function getReleasedate() {
         return $this->releasedate;
     }
 
@@ -145,10 +146,9 @@ class Book
      * @param string $description
      * @return Book
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -157,8 +157,28 @@ class Book
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
+
+    /**
+     * Set categories
+     *
+     * @param string $categories
+     * @return Book
+     */
+    public function setCategories($categories) {
+        $this->categories = $categories;
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return string 
+     */
+    public function getCategories() {
+        return $this->categories;
+    }
+
 }
