@@ -17,7 +17,7 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('author')
-            ->add('releasedate')
+            ->add('releasedate', 'datepicker')
             ->add('description')
             ->add('categories')
         ;

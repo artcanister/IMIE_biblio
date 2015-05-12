@@ -1,4 +1,15 @@
 services:
+<<<<<<< HEAD
     book_manager:
         class: AppBundle\Services\BookManager
         arguments: ["@doctrine.orm.entity_manager"]
+=======
+    app.form_book :
+        class: AppBundle\Form\BookType
+        tags:
+            - { name: form.type, alias: appbundle_book}
+    app.form.type.datepicker:
+        class: AppBundle\Form\Type\DatePickerType
+        tags:
+            - { name: form.type, alias: datepicker }
+>>>>>>> feature/front
