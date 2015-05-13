@@ -15,3 +15,9 @@ services:
         class : AppBundle\Form\BookRestType
         tags:
             - { name: form.type, alias: book}
+    wsse.security.authentication.provider:
+        class: AppBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ["","%kernel.cache_dir%/security/nonces"]
+    wsse.security.authentication.listener:
+        class: AppBundle\Security\Firewall\WsseListener
+        arguments: ["@security.token_storage","@security.authentication.manager"]
