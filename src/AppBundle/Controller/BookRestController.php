@@ -56,7 +56,7 @@ class BookRestController extends Controller {
      *  output="AppBundle\Entity\Book"
      * )
      */
-    public function addBookAction(Request $request){
+    public function newBookAction(Request $request){
        $this->get("book_manager")->addBook($request);
         
     }
