@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Entity\Book;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 class BookRestController extends Controller {
     /**
@@ -15,7 +16,7 @@ class BookRestController extends Controller {
      *  resource = true,
      *  description="Return all our books (get)",
      *  tags={
-     *      "in-development"}
+     *      "stable"}
      * )
      * 
      * 
@@ -32,8 +33,11 @@ class BookRestController extends Controller {
      * @ApiDoc(
      *  resource = true,
      *  description="Return a book by its id",
+     *  parameters={
+     * {"name"="bookId", "dataType"="Integer", "required"=true, "description"="book id"}
+     * },
      *  tags={
-     *      "in-development"}
+     *      "stable"}
      * )
      * 
      */
@@ -46,16 +50,17 @@ class BookRestController extends Controller {
      * 
      * @ApiDoc(
      *  resource = true,
-     *  description="Can add a book.",
-     *  tags={
-     *      "in-development"}
+     *  description="add a book.",
+     *  tags={"in-development"},
+     *  input="book",
+     *  output="AppBundle\Entity\Book"
      * )
-     * 
      */
-    public function addBookAction(){
-        //post -> bookmanager request
+    public function addBookAction(Request $request){
+       $this->get("book_manager")->addBook($request);
         
     }
+    
     /**
      * 
      * @ApiDoc(
@@ -68,6 +73,25 @@ class BookRestController extends Controller {
      */
     public function deleteBookAction($id){
       $this->get("book_manager")->removeBook($id);
+   }
+   
+   /**
+     * 
+     * @ApiDoc(
+     *  resource = true,
+     *  description="Update an existing book",
+     *  tags={
+     *      "in-development"},
+    * input="book",
+     *  output="AppBundle\Entity\Book",
+    * parameters={
+    * {"name"="bookId", "dataType"="Integer", "required"=true}
+    * }
+     * )
+     * 
+     */
+   public function putBookAction(Request $request, $id){
+       $this->get("book_manager")->updateBook($request, $id);
    }
     
 }

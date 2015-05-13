@@ -1,9 +1,8 @@
 services:
-<<<<<<< HEAD
     book_manager:
         class: AppBundle\Services\BookManager
-        arguments: ["@doctrine.orm.entity_manager"]
-=======
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory"]
+
     app.form_book :
         class: AppBundle\Form\BookType
         tags:
@@ -12,4 +11,7 @@ services:
         class: AppBundle\Form\Type\DatePickerType
         tags:
             - { name: form.type, alias: datepicker }
->>>>>>> feature/front
+    app.book :
+        class : AppBundle\Form\BookRestType
+        tags:
+            - { name: form.type, alias: book}
