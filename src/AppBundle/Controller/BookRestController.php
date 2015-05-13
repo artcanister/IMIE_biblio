@@ -23,9 +23,7 @@ class BookRestController extends Controller {
      */
     public function getBooksAction(){
         //-action : config externe
-        $books = $this->getDoctrine()->getRepository('AppBundle:Book')->findAll();
-        
-        return $books;
+        return $this->getDoctrine()->getRepository('AppBundle:Book')->findAll();
     }
     
     /**
@@ -42,8 +40,7 @@ class BookRestController extends Controller {
      * 
      */
     public function getBookAction($id){
-        $book = $this->get("book_manager")->findById($id);
-        return $book;
+        return $this->get("book_manager")->findById($id);
     }
     
     /**
@@ -57,7 +54,7 @@ class BookRestController extends Controller {
      * )
      */
     public function addBookAction(Request $request){
-       $this->get("book_manager")->addBook($request);
+       return $this->get("book_manager")->addBook($request);
         
     }
     
@@ -72,7 +69,7 @@ class BookRestController extends Controller {
      * 
      */
     public function deleteBookAction($id){
-      $this->get("book_manager")->removeBook($id);
+      return $this->get("book_manager")->removeBook($id);
    }
    
    /**
@@ -91,7 +88,7 @@ class BookRestController extends Controller {
      * 
      */
    public function putBookAction(Request $request, $id){
-       $this->get("book_manager")->updateBook($request, $id);
+       return $this->get("book_manager")->updateBook($request, $id);
    }
     
 }

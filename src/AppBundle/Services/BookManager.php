@@ -24,11 +24,10 @@ class BookManager{
     public function addBook(Request $request){
         $book = new Book();
         $form = $this->factory->create('book', $book);
-        $form->handleRequest($request);
-        if(count($form->getErrors(true))>0){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($book);
-            $em->flush();
+        $form->bind($request);
+        if($form->isValid()){
+            $this->em->persist($book);
+            $this->em->flush();
             
         }
         
@@ -37,21 +36,24 @@ class BookManager{
       
     }
     
-    public function removeBook(){
+    public function removeBook($id){
+        $book = $this->repo->findOneById($id);
+        $this->em->remove($book);
+        $this->em->flush();
         
     }
     
     public function updateBook(Request $request, $id){
-        //handleRequest : fait lui-même le set des datas
+        //bind : fait lui-même le set des datas
         
         $book = $this->repo->findOneById($id);
         $form = $this->factory->create('book', $book);
-        $form->handleRequest($request);
+        $form->bind($request);
         
-            if(count($form->getErrors(true))>0){
+        if($form->isValid()){
             
-            $this->persist($book);
-            $this->flush();
+            $this->em->persist($book);
+            $this->em->flush();
         }
         
         
