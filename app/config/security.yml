@@ -18,7 +18,7 @@ security:
 
     firewalls:
         wsse_secured:
-            pattern: ^/api/.*
+            pattern: /api/.*
             stateless:  true
             wsse: true
             anonymous: true
@@ -35,6 +35,9 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/api/books, role: ROLE_ADMIN }
+        - { path: ^/api/tokens/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
