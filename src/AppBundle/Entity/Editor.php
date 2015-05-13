@@ -56,6 +56,14 @@ class Editor
      */
     private $country;
 
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="editor", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $editor;
+
 
     /**
      * Get id
@@ -180,5 +188,45 @@ class Editor
     public function getCountry()
     {
         return $this->country;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->editor = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add editor
+     *
+     * @param \AppBundle\Entity\Book $editor
+     * @return Editor
+     */
+    public function addEditor(\AppBundle\Entity\Book $editor)
+    {
+        $this->editor[] = $editor;
+    
+        return $this;
+    }
+
+    /**
+     * Remove editor
+     *
+     * @param \AppBundle\Entity\Book $editor
+     */
+    public function removeEditor(\AppBundle\Entity\Book $editor)
+    {
+        $this->editor->removeElement($editor);
+    }
+
+    /**
+     * Get editor
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
 }

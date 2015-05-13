@@ -28,6 +28,13 @@ class Genre
      */
     private $genre;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="Book", inversedBy="genres", cascade={"persist"})
+     */
+    private $books;
+
 
     /**
      * Get id
@@ -60,5 +67,45 @@ class Genre
     public function getGenre()
     {
         return $this->genre;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add books
+     *
+     * @param \AppBundle\Entity\Book $books
+     * @return Genre
+     */
+    public function addBook(\AppBundle\Entity\Book $books)
+    {
+        $this->books[] = $books;
+    
+        return $this;
+    }
+
+    /**
+     * Remove books
+     *
+     * @param \AppBundle\Entity\Book $books
+     */
+    public function removeBook(\AppBundle\Entity\Book $books)
+    {
+        $this->books->removeElement($books);
+    }
+
+    /**
+     * Get books
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

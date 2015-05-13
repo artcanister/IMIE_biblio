@@ -56,6 +56,13 @@ class Author
      */
     private $nationality;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="Book", mappedBy="authors", cascade={"persist"})
+     */
+    private $books;
+
 
     /**
      * Get id
@@ -180,5 +187,45 @@ class Author
     public function getNationality()
     {
         return $this->nationality;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add books
+     *
+     * @param \AppBundle\Entity\Book $books
+     * @return Author
+     */
+    public function addBook(\AppBundle\Entity\Book $books)
+    {
+        $this->books[] = $books;
+    
+        return $this;
+    }
+
+    /**
+     * Remove books
+     *
+     * @param \AppBundle\Entity\Book $books
+     */
+    public function removeBook(\AppBundle\Entity\Book $books)
+    {
+        $this->books->removeElement($books);
+    }
+
+    /**
+     * Get books
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

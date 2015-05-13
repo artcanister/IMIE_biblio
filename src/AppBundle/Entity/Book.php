@@ -38,10 +38,10 @@ class Book {
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="books", cascade={"persist"})
      * @Expose
      */
-    private $author;
+    private $authors;
 
     /**
      * @var \DateTime
@@ -60,13 +60,20 @@ class Book {
     private $description;
 
     /**
-     *
      * @var string
-     * 
-     * @ORM\Column(name="categories", type="string")
+     *
+     * @ORM\ManyToMany(targetEntity="Genre", inversedBy="books", cascade={"persist"})
      * @Expose
      */
-    private $categories;
+    private $genres;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Editor", inversedBy="books", cascade={"persist"})
+     * @Expose
+     */
+    private $editor;
 
     /**
      * Get id
@@ -96,27 +103,6 @@ class Book {
      */
     public function getTitle() {
         return $this->title;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     * @return Book
-     */
-    public function setAuthor($author) {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string 
-     */
-    public function getAuthor() {
-        return $this->author;
     }
 
     /**
@@ -181,4 +167,101 @@ class Book {
         return $this->categories;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add authors
+     *
+     * @param \AppBundle\Entity\Author $authors
+     * @return Book
+     */
+    public function addAuthor(\AppBundle\Entity\Author $authors)
+    {
+        $this->authors[] = $authors;
+        $author->addBook($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove authors
+     *
+     * @param \AppBundle\Entity\Author $authors
+     */
+    public function removeAuthor(\AppBundle\Entity\Author $authors)
+    {
+        $this->authors->removeElement($authors);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * Add genres
+     *
+     * @param \AppBundle\Entity\Genre $genres
+     * @return Book
+     */
+    public function addGenre(\AppBundle\Entity\Genre $genres)
+    {
+        $this->genres[] = $genres;
+    
+        return $this;
+    }
+
+    /**
+     * Remove genres
+     *
+     * @param \AppBundle\Entity\Genre $genres
+     */
+    public function removeGenre(\AppBundle\Entity\Genre $genres)
+    {
+        $this->genres->removeElement($genres);
+    }
+
+    /**
+     * Get genres
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param \AppBundle\Entity\Editor $editor
+     * @return Book
+     */
+    public function setEditor(\AppBundle\Entity\Editor $editor = null)
+    {
+        $this->editor = $editor;
+    
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return \AppBundle\Entity\Editor 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
+    }
 }

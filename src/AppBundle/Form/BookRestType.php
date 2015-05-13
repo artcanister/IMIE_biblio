@@ -19,19 +19,11 @@ class BookRestType extends AbstractType
                'required' => false
                )
             )
-            ->add('author', null, array(
-               'required' => false
-               )
-            )
             ->add('releasedate', 'datepicker', array(
                'required' => false
                )
             )
             ->add('description', null, array(
-               'required' => false
-               )
-            )
-            ->add('categories', null, array(
                'required' => false
                )
             )
