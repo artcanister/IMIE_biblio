@@ -1,30 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
-        
-        <table class="striped hoverable">
+
+
+    <table class="striped hoverable">
         <thead>
-          <tr>
-              <th data-field="title">Title</th>
-              <th data-field="author">Author</th>
-              <th data-field="releasedate">Release Date</th>
-              <th data-field="categories">Categories</th>
-              <th data-field="description">Description</th>
-          </tr>
-          </thead>
+            <tr>
+                <th data-field="title">Title</th>
+                <th data-field="author">Author</th>
+                <th data-field="releasedate">Release Date</th>
+                <th data-field="categories">Categories</th>
+                <th data-field="description">Description</th>
+            </tr>
+        </thead>
         <tbody>
             {%for book in books %}
-            <tr>
-                <td>{{book.title}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.releasedate | date('d-m-Y')}}</td>
-                <td>{{book.categories}}</td>
-                <td>{{book.description}}</td>
-            </tr>
+                <tr>
+                    <td>{{book.title}}</td>
+                    <td> <ul>
+                            {%for author in book.authors%}
+                                <li>{{author.firstname}}</li>
+                                {%endfor%}
+                        </ul>
+                    </td>
+                    <td>{{book.releasedate | date('d-m-Y')}}</td>
+                    <td> <ul>
+                            {%for genre in book.genres%}
+                                <li>{{genre.genre}}</li>
+                                {%endfor%}
+                        </ul>
+                    </td>
+                    <td>{{book.description}}</td>
+                </tr>
             {% endfor %}
         </tbody>
-        
 
-        
-{% endblock %}
+
+
+    {% endblock %}

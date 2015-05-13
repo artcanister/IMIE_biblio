@@ -63,6 +63,9 @@ class Author
      */
     private $books;
 
+    public function __toString() {
+        return $this->firstname;
+    }
 
     /**
      * Get id

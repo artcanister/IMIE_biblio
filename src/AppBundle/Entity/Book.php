@@ -39,7 +39,7 @@ class Book {
      * @var string
      *
      * @ORM\ManyToMany(targetEntity="Author", inversedBy="books", cascade={"persist"})
-     * @Expose
+     * 
      */
     private $authors;
 
@@ -63,7 +63,7 @@ class Book {
      * @var string
      *
      * @ORM\ManyToMany(targetEntity="Genre", inversedBy="books", cascade={"persist"})
-     * @Expose
+     * 
      */
     private $genres;
 
@@ -71,7 +71,7 @@ class Book {
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Editor", inversedBy="books", cascade={"persist"})
-     * @Expose
+     * 
      */
     private $editor;
 
@@ -148,26 +148,6 @@ class Book {
     }
 
     /**
-     * Set categories
-     *
-     * @param string $categories
-     * @return Book
-     */
-    public function setCategories($categories) {
-        $this->categories = $categories;
-        return $this;
-    }
-
-    /**
-     * Get categories
-     *
-     * @return string 
-     */
-    public function getCategories() {
-        return $this->categories;
-    }
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -178,12 +158,12 @@ class Book {
     /**
      * Add authors
      *
-     * @param \AppBundle\Entity\Author $authors
+     * @param \AppBundle\Entity\Author $author
      * @return Book
      */
-    public function addAuthor(\AppBundle\Entity\Author $authors)
+    public function addAuthor(\AppBundle\Entity\Author $author)
     {
-        $this->authors[] = $authors;
+        $this->authors[] = $author;
         $author->addBook($this);
     
         return $this;
