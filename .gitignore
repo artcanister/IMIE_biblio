@@ -1,4 +1,4 @@
-nbproject/private/
+nbproject/*
 web/*
 app/logs/*
 app/cache/*
